@@ -12,7 +12,6 @@ Right now, the only way is to download the `QuakeRemastered.asl` file, and point
 
 ## Future Plans
 
-- Fix possible issue with not splitting, caused by CurrentMap turning blank during the map change and the script not recovering correctly.
 - If extra functionality is needed (or desired) I will consider moving this to a C# solution. This could include:
     - Ability to set event's for each split, giving people full control
     - An event for specific map, giving some security around accidentaly loading a save from a pervious level
