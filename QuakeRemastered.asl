@@ -4,10 +4,17 @@ state("Quake_x64_steam")
     int gameState: 0x01AF4EC0, 0x170;
 }
 
+init 
+{
+    // Needed to replace old.mapName because of level loading blanking out value
+    vars.latestSplitMap = "";
+}
+
 start
 {
     if(current.mapName == "start")
     {
+        vars.latestSplitMap = current.mapName;
         return true;
     }
 
@@ -16,7 +23,8 @@ start
 
 split
 {
-    // Skip if map has temp been set to empty
+    // mapName is blank during loading of a level, which causes accidental splitting during quick loads and level restarts.
+    // Skip if mapName is blank as level is loading
     if(current.mapName == null || old.mapName == null || current.mapName.Length == 0 || old.mapName.Length == 0) 
     {
         print("Map Skipped: " + old.mapName + " -> " + current.mapName);
@@ -29,10 +37,11 @@ split
         return true;
     }
 
-    if(current.mapName != old.mapName)
+    if(current.mapName != vars.latestSplitMap)
     {
         print("Map: " + old.mapName + " -> " + current.mapName);
         print("Current Game State:" + current.gameState);
+        vars.latestSplitMap = current.mapName;
         return true;
     }
 }
