@@ -25,7 +25,7 @@ split
 {
     // mapName is blank during loading of a level, which causes accidental splitting during quick loads and level restarts.
     // Skip if mapName is blank as level is loading
-    if(current.mapName == null || old.mapName == null || current.mapName.Length == 0 || old.mapName.Length == 0) 
+    if(current.mapName == null || current.mapName.Length == 0) 
     {
         print("Map Skipped: " + old.mapName + " -> " + current.mapName);
         return false;
