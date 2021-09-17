@@ -4,14 +4,31 @@ state("Quake_x64_steam")
     int gameState: 0x01AF4EC0, 0x170;
 }
 
+startup
+{
+    settings.Add("run_episode", false, "Select when doing Episode Runs. Set's AutoStart on first map of each Ep. and Splits at Time Screen on last map of each Ep.");
+}
+
 init 
 {
     // Needed to replace old.mapName because of level loading blanking out value
     vars.latestSplitMap = "";
+
+    // Array of Episode ending maps
+    vars.epEndMaps = "|e1m7|e2m6|e3m6|e4m7|";
 }
 
 start
 {
+    if (settings["run_episode"]) 
+    {
+        if(current.mapName.EndsWith("m1"))
+        {
+            vars.latestSplitMap = current.mapName;
+            return true;
+        }
+    }
+
     if(current.mapName == "start")
     {
         vars.latestSplitMap = current.mapName;
@@ -31,10 +48,21 @@ split
         return false;
     }
 
-    if(current.mapName == "end" && current.gameState == 2)
+    if (settings["run_episode"]) 
     {
-        print("BOSS KILLED");
-        return true;
+        if(vars.epEndMaps.Contains("|" + current.mapName + "|") && current.gameState == 1)
+        {
+            vars.latestSplitMap = current.mapName;
+            return true;
+        }
+    } 
+    else
+    {
+        if(current.mapName == "end" && current.gameState == 2)
+        {
+            print("BOSS KILLED");
+            return true;
+        }
     }
 
     if(current.mapName != vars.latestSplitMap)
