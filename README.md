@@ -1,3 +1,11 @@
+# ⚠ **Currently broken** ⚠
+
+Due to game updates in the last year, I haven't been able to generate new pointers thus breaking the AutoSplitter. I have tried quite a few times not to get something working again but I still have no luck. I wonder if it's due to how the engine works or something along those lines.
+
+But as for this AutoSplitter, it is officially broken and will continue to be until either my skills in Cheat Engine improve or someone finds pointers that don't break after restarting the game.
+
+I will still monitor for PRs and issues if anyone wants to help, but I am sorry for the inconvenience.
+
 # LiveSplit.QuakeRemastered
 
 LiveSplit Auto Splitter for Quake (2021) / Quake Remastered. Built using [LiveSplit's Auto Splitter Language](https://github.com/LiveSplit/LiveSplit.AutoSplitters/blob/master/README.md) for the vanilla game, no mods needed.
